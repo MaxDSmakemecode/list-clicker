@@ -35,6 +35,7 @@ class App extends Component{
         // check if current id from the todo list file matches the id parameter received by the handleChange function
         if(todo.id === id){
             todo.completed = !todo.completed
+            console.log(todo.completed)
         }
         // includes the new todo item to the "updatedTodos" 
         return todo
@@ -43,6 +44,8 @@ class App extends Component{
       return{
         todos: updatedTodos
       }
+    }, function(){
+      console.log(this.state.todos.completed)
     })
   }
 
