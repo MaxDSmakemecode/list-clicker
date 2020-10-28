@@ -1,11 +1,9 @@
 import React from 'react'
 
-class Conditional extends React.Component{
-    render(){
-        return(
-            <div></div>
-        )
-    }
+function Conditional(props){
+    return(
+        <h1>LOADED</h1>
+    )
 }
 
 export default Conditional
