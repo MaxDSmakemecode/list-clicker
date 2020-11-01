@@ -1,34 +1,50 @@
 import React, {Component} from 'react'
-import Conditional from './components/Conditional'
+/*
+Challenge:
+
+Given a stateless functional component:
+1. Follow the steps necessary to add state to it,
+2. Have state keep track of whether the user is logged in or not
+3. Add a button that logs the user in/out
+    a. extra challenge - make the button display "log in" if they're not logged in and "log out" if they are
+4. Display text that says "Logged in" if the user is logged in, or "Logged out" if they're not.
+*/
 
 class App extends Component{
-  constructor(){
-    super()
-    this.state = {
-      isLoading: true
+    constructor(){
+        super()
+
+        this.state = {
+            isLoggedIn: false
+        }
+
+        this.handleClick = this.handleClick.bind(this)
     }
-  }
 
-  // imagine a loading icon appearing when the website is making an API call and it takes longer. That would be a case to use conditional rendering
-  // in this case we don't have any API so below code just simulates a loading time with classic setTimeout
-  // once loading has finished after 1.5 seconds the
-  componentDidMount(){
-    setTimeout(() => {
-      this.setState({
-        isLoading: false
-      })
-    }, 1500)
-  }
+    handleClick(){
+        this.setState(prevState => {
+            // const logState = this.prevState.isLoggedIn.map(log => {
+            //     if(log === false){
+            //         log = true
+            //     }
+            // })
+            return {
+                isLoggedIn: !prevState.isLoggedIn
+            }
+        })
+    }
 
-  render(){
-    return(
-      <div>
-        {this.state.isLoading ?
-        <h1>Loading...</h1> :
-        <Conditional />}
-      </div>
-    )
-  }
+    render(){
+        let buttonText = this.state.isLoggedIn ? "LOG OUT" : "LOG IN"
+        let displayText = this.state.isLoggedIn ? "Logged in" : "Logged out"
+
+        return(
+            <div>
+                <h1>{displayText}</h1>
+                <button onClick={this.handleClick}>{buttonText}</button>
+            </div>
+        )
+    }
 }
 
 export default App

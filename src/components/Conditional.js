@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Conditional(props){
+function Conditional(){
     return(
         <h1>LOADED</h1>
     )
