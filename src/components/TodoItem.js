@@ -5,10 +5,18 @@ const flexBox = {
     padding: '1rem'
 }
 
-const paragraphStyle = {
+const uncompleteStyle = {
     paddingLeft: '1rem', 
     marginTop: '-0.05rem',
     color: '#f53653',
+    textTransform: 'uppercase',
+    fontWeight: 'bold'
+}
+
+const completedStyle = {
+    paddingLeft: '1rem', 
+    marginTop: '-0.05rem',
+    color: '#19d477',
     textTransform: 'uppercase',
     fontWeight: 'bold'
 }
@@ -20,7 +28,7 @@ const TodoItem = (props) => {
                 type="checkbox"
                 onChange={() => props.handleChange(props.item.id)}
             />
-            <p style={paragraphStyle}>
+            <p style={props.item.completed ? completedStyle : uncompleteStyle}>
                 {props.item.text}
             </p>
         </div>
