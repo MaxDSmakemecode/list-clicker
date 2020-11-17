@@ -1,32 +1,42 @@
 import React, {Component} from 'react'
 
-class App extends Component{
+class App extends Component {
     constructor(){
         super()
         this.state = {
-            firstName: ""
+            firstName: "",
+            lastName: ""
         }
 
         this.handleChange = this.handleChange.bind(this)
     }
 
-    // on change function
     handleChange(event){
-        const firstNameName =
+        const {name, value} = event.target
 
         this.setState({
-            firstName: event.target.value
+            [name]: value
         })
     }
 
     render(){
-
         return(
             <form action="">
-                <input name={this.firstNameName} type="text" placeholder="First Name" onChange={this.handleChange} />
-                <br/>
-                <input name={this.lastNameName} type="text" placeholder="Last Name" onChange={this.handleChange} />
-                <h1>{this.state.firstName}</h1>
+                <input 
+                    name="firstName"
+                    type="text" 
+                    placeholder="First Name"
+                    value={this.state.firstName} 
+                    onChange={this.handleChange} 
+                />
+                <input 
+                    name="lastName"
+                    type="text" 
+                    placeholder="Last Name" 
+                    value={this.state.lastName} 
+                    onChange={this.handleChange} 
+                />
+                <h1>{this.state.firstName} {this.state.lastName}</h1>
             </form>
         )
     }
