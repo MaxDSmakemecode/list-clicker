@@ -1,5 +1,10 @@
 import React, { Component } from "react";
 
+const userInput = document.getElementById('name').value
+document.querySelector('.text-field').addEventListener("click", function(){
+  document.getElementById('output').textContent = userInput
+})
+
 class App extends Component {
   constructor() {
     super();
