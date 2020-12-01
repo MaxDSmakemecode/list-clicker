@@ -9,6 +9,7 @@ class App extends Component {
       lastName: "",
       gender: "",
       age: "",
+      destination: "",
       vegetarian: "",
       kosher: "",
       lactoseFree: "",
@@ -18,30 +19,30 @@ class App extends Component {
   }
 
   handleChange(event){
-    const { name, value, type, checked} = event.target
+    const { name, value, type, checked } = event.target
 
     type === "checkbox" ? this.setState({ [name]: checked }) : this.setState({ [name]: value })
   }
 
   render(){
-    const formWrapper = {
+    const formStyle = {
       width: 300,
-      margin: 2 + "rem auto",
+      margin: 1 + "rem auto",
     }
 
-    const inputWrapper = {
-      width: 100 + "%",
-      padding: 0.5 + "rem",
+    const inputStyle = {
+      width: 300,
+      padding: .5 + "rem",
     }
 
-    const selectWrapper = {
-      width: 321,
-      padding: 0.5 + "rem",
+    const selectStyle = {
+      width: 320,
+      padding: .5 + "rem",
     }
 
     return(
-      <form style={formWrapper}>
-        <input style={inputWrapper}
+      <form style={formStyle}>
+        <input style={inputStyle}
           type="text"
           name="firstName"
           value={this.state.firstName}
@@ -50,7 +51,7 @@ class App extends Component {
         />
         <br/>
         <br/>
-        <input style={inputWrapper}
+        <input style={inputStyle}
           type="text"
           name="lastName"
           value={this.state.lastName}
@@ -60,7 +61,7 @@ class App extends Component {
         <br/>
         <br/>
         <label>
-          <input
+          <input 
             type="radio"
             name="gender"
             value="Male"
@@ -69,9 +70,8 @@ class App extends Component {
           /> Male
         </label>
         <br/>
-        <br/>
         <label>
-          <input
+          <input 
             type="radio"
             name="gender"
             value="Female"
@@ -81,7 +81,7 @@ class App extends Component {
         </label>
         <br/>
         <br/>
-        <input style={inputWrapper}
+        <input style={inputStyle}
           type="number"
           name="age"
           value={this.state.age}
@@ -90,19 +90,19 @@ class App extends Component {
         />
         <br/>
         <br/>
-        <select style={selectWrapper}
+        <select style={selectStyle}
           name="destination"
           value={this.state.destination}
           onChange={this.handleChange}
-        >
+        > 
           <option value="Tokyo">Tokyo</option>
           <option value="Berlin">Berlin</option>
-          <option value="Cancun">Cancun</option>
+          <option value="Lima">Lima</option>
         </select>
         <br/>
         <br/>
         <label>
-          <input
+          <input 
             type="checkbox"
             name="vegetarian"
             checked={this.state.vegetarian}
@@ -110,9 +110,8 @@ class App extends Component {
           /> vegetarian
         </label>
         <br/>
-        <br/>
         <label>
-          <input
+          <input 
             type="checkbox"
             name="kosher"
             checked={this.state.kosher}
@@ -120,20 +119,21 @@ class App extends Component {
           /> kosher
         </label>
         <br/>
-        <br/>
         <label>
-          <input
+          <input 
             type="checkbox"
             name="lactoseFree"
             checked={this.state.lactoseFree}
             onChange={this.handleChange}
           /> lactose free
         </label>
+        <br/>
+        <br/>
         <p>Your name: {this.state.firstName} {this.state.lastName}</p>
-        <p>Your sex: {this.state.gender}</p>
+        <p>Your gender: {this.state.gender}</p>
         <p>Your age: {this.state.age}</p>
         <p>Your destination: {this.state.destination}</p>
-        <p>Your dietry restrictions:
+        <p>Your dietry restrictions: 
           <br/>Vegetarian? {this.state.vegetarian ? "Yes" : "No"}
           <br/>Kosher? {this.state.kosher ? "Yes" : "No"}
           <br/>Lactose free? {this.state.lactoseFree ? "Yes" : "No"}
