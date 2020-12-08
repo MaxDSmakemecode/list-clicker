@@ -7,44 +7,46 @@ class MemeGenerator extends Component{
         this.state = {
             topText: "",
             bottomText: "",
-            randomImg: "",
-            allMemeImgs: [],
+            randomImg: "https://picsum.photos/id/237/200/300",
+            allMemeImgs: "",
         }
-        
+
         this.handleChange = this.handleChange.bind(this)
-        this.handleClick = this.handleClick.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     componentDidMount(){
-        fetch('https://api.imgflip.com/get_memes')
+        fetch("https://api.imgflip.com/get_memes")
         .then(response => response.json())
         .then(response => {
             const { memes } = response.data
-            this.setState({ 
-                allMemeImgs: memes 
+            this.setState({
+                allMemeImgs: memes
             })
+            console.log(this.state.allMemeImgs)
         })
     }
 
     handleChange(event){
         const { name, value } = event.target
-
         this.setState({
             [name]: value
         })
     }
 
-    handleClick(){
+    handleSubmit(event){
+        event.preventDefault()
+        const randNum = Math.floor(Math.random() * this.state.allMemeImgs.length)
+        const randMeme = this.state.allMemeImgs[randNum].url
         this.setState({
-            randomImg: this.state.allMemeImgs[Math.floor(Math.random() * this.state.allMemeImgs.length)].url
+            randomImg: randMeme
         })
-        console.log(this.state.allMemeImgs[Math.floor(Math.random() * this.state.allMemeImgs.length)].url)
     }
-
+    
     render(){
         return(
-            <React.Fragment>
-                <form className="meme-form">
+            <main>
+                <form className="meme-form" onSubmit={this.handleSubmit}>
                     <input 
                         type="text"
                         name="topText"
@@ -59,16 +61,17 @@ class MemeGenerator extends Component{
                         placeholder="Bottom text"
                         onChange={this.handleChange}
                     />
-                    <button 
-                        onClick={this.handleClick}
-                    >Gen</button>
+                    <button>Gen</button>
                 </form>
                 <div className="meme">
-                    <img src={this.state.randomImg} alt=""/>
+                    <img 
+                        src={this.state.randomImg} 
+                        alt="Meme image"
+                    />
                     <h2 className="top">{this.state.topText}</h2>
                     <h2 className="bottom">{this.state.bottomText}</h2>
                 </div>
-            </React.Fragment>
+            </main>
         )
     }
 }

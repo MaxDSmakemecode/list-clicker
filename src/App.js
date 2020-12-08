@@ -1,15 +1,151 @@
 import React, {Component} from 'react'
-import Header from './components/Header'
-import MemeGenerator from './components/MemeGenerator.js'
 
-function App(){
-  return(
-    <React.Fragment>
-      <Header />
-      <br/>
-      <MemeGenerator />
-    </React.Fragment>
-  )
+class App extends Component{
+  constructor(){
+    super()
+
+    this.state = {
+      firstName: "",
+      lastName: "",
+      gender: "",
+      age: "",
+      destinations: "",
+      vegetarian: "",
+      kosher: "",
+      lactoseFree: "",
+    }
+
+    this.handleChange = this.handleChange.bind(this)
+  }
+
+  handleChange(event){
+    const { name, value, type, checked } = event.target
+
+    type === "checkbox" ? this.setState({ [name]: checked }) : this.setState({ [name]: value })
+  }
+
+  render(){
+    const wrapper = {
+      width: 300,
+      margin: 1 + "rem auto",
+    }
+
+    const formStyles = {
+      width: 300,
+    }
+
+    const inputStyle = {
+      width: 300,
+      padding: .5 + "rem",
+    }
+
+    return(
+      <div style={wrapper}>
+        <form style={formStyles}>
+          <input 
+            style={inputStyle}
+            type="text"
+            name="firstName"
+            value={this.state.firstName}
+            placeholder="First name"
+            onChange={this.handleChange}
+          />
+          <br/>
+          <br/>
+          <input 
+            style={inputStyle}
+            type="text"
+            name="lastName"
+            value={this.state.lastName}
+            placeholder="Last name"
+            onChange={this.handleChange}
+          />
+          <br/>
+          <br/>
+          <label>
+            <input 
+              type="radio"
+              name="gender"
+              value="Male"
+              checked={this.state.gender === "Male"}
+              onChange={this.handleChange}
+            /> Male
+          </label>
+          <br/>
+          <label>
+            <input 
+              type="radio"
+              name="gender"
+              value="Female"
+              checked={this.state.gender === "Female"}
+              onChange={this.handleChange}
+            /> Female
+          </label>
+          <br/>
+          <br/>
+          <input 
+            style={inputStyle}
+            type="number"
+            name="age"
+            value={this.state.age}
+            onChange={this.handleChange}
+          />
+          <br/>
+          <br/>
+          <select 
+            style={inputStyle}
+            name="destination"
+            value={this.state.destination}
+            onChange={this.handleChange}
+          >
+              <option value="Tokyo">Tokyo</option>
+              <option value="Berlin">Berlin</option>
+              <option value="Cancun">Cancun</option>
+          </select>
+          <br/>
+          <br/>
+          Dietry restrictions: <br />
+          <label>
+            <input 
+              type="checkbox"
+              name="vegetarian"
+              checked={this.state.vegetarian}
+              onChange={this.handleChange}
+            /> Vegetarian
+          </label>
+          <br/>
+          <label>
+            <input 
+              type="checkbox"
+              name="kosher"
+              checked={this.state.kosher}
+              onChange={this.handleChange}
+            /> Kosher
+          </label>
+          <br/>
+          <label>
+            <input 
+              type="checkbox"
+              name="lactoseFree"
+              checked={this.state.lactoseFree}
+              onChange={this.handleChange}
+            /> Lactose free
+          </label>
+          <br/>
+        </form>
+        <br/>
+        <p>Your name: {this.state.firstName} {this.state.lastName}</p>
+        <p>Your gender: {this.state.gender}</p>
+        <p>Your age: {this.state.age}</p>
+        <p>Your destination: {this.state.destination}</p>
+        <p>Your dietry restrictions: <br />
+          Vegetarian? {this.state.vegetarian ? "Yes" : "No"}<br />
+          Kosher? {this.state.kosher ? "Yes" : "No"}<br />
+          Lactose free? {this.state.lactoseFree ? "Yes" : "No"}
+        </p>
+      </div>
+    )
+  }
 }
 
 export default App
