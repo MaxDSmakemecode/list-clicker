@@ -1,24 +1,36 @@
 import React, {Component} from 'react'
 
 class App extends Component{
-  constructor(){
-    super()
 
-    this.state = {
-      firstName: "",
-      lastName: "",
-      gender: "",
-      age: "",
-      destinations: "",
-      vegetarian: "",
-      kosher: "",
-      lactoseFree: "",
-    }
-
-    this.handleChange = this.handleChange.bind(this)
+  // new way of writing state
+  state = {
+    firstName: "",
+    lastName: "",
+    gender: "",
+    age: "",
+    destination: "",
+    vegetarian: "",
+    kosher: "",
+    lactoseFree: "",
   }
 
-  handleChange(event){
+  // constructor(){
+  //   super()
+
+  //   this.state = {
+  //     firstName: "",
+  //     lastName: "",
+  //     gender: "",
+  //     age: "",
+  //     destination: "",
+  //     vegetarian: "",
+  //     kosher: "",
+  //     lactoseFree: "",
+  //   }
+  // }
+
+  // write arrow function here so you can get rid of binding the method
+  handleChange = (event) => {
     const { name, value, type, checked } = event.target
 
     type === "checkbox" ? this.setState({ [name]: checked }) : this.setState({ [name]: value })
@@ -30,10 +42,6 @@ class App extends Component{
       margin: 1 + "rem auto",
     }
 
-    const formStyles = {
-      width: 300,
-    }
-
     const inputStyle = {
       width: 300,
       padding: .5 + "rem",
@@ -41,9 +49,8 @@ class App extends Component{
 
     return(
       <div style={wrapper}>
-        <form style={formStyles}>
-          <input 
-            style={inputStyle}
+        <form>
+          <input style={inputStyle}
             type="text"
             name="firstName"
             value={this.state.firstName}
@@ -52,8 +59,7 @@ class App extends Component{
           />
           <br/>
           <br/>
-          <input 
-            style={inputStyle}
+          <input style={inputStyle}
             type="text"
             name="lastName"
             value={this.state.lastName}
@@ -63,7 +69,7 @@ class App extends Component{
           <br/>
           <br/>
           <label>
-            <input 
+            <input
               type="radio"
               name="gender"
               value="Male"
@@ -73,7 +79,7 @@ class App extends Component{
           </label>
           <br/>
           <label>
-            <input 
+            <input
               type="radio"
               name="gender"
               value="Female"
@@ -83,65 +89,66 @@ class App extends Component{
           </label>
           <br/>
           <br/>
-          <input 
-            style={inputStyle}
+          <input style={inputStyle}
             type="number"
             name="age"
             value={this.state.age}
+            placeholder="Age"
             onChange={this.handleChange}
           />
           <br/>
           <br/>
-          <select 
-            style={inputStyle}
+          <select style={inputStyle}
             name="destination"
             value={this.state.destination}
             onChange={this.handleChange}
           >
-              <option value="Tokyo">Tokyo</option>
-              <option value="Berlin">Berlin</option>
-              <option value="Cancun">Cancun</option>
+            <option value="Tokyo">Tokyo</option>
+            <option value="Berlin">Berlin</option>
+            <option value="New York">New York</option>
           </select>
           <br/>
           <br/>
-          Dietry restrictions: <br />
+          Dietry restrictions:
+          <br/>
           <label>
-            <input 
+            <input
               type="checkbox"
               name="vegetarian"
               checked={this.state.vegetarian}
               onChange={this.handleChange}
-            /> Vegetarian
+            /> vegetarian
           </label>
           <br/>
           <label>
-            <input 
+            <input
               type="checkbox"
               name="kosher"
               checked={this.state.kosher}
               onChange={this.handleChange}
-            /> Kosher
+            /> kosher
           </label>
           <br/>
           <label>
-            <input 
+            <input
               type="checkbox"
               name="lactoseFree"
               checked={this.state.lactoseFree}
               onChange={this.handleChange}
-            /> Lactose free
+            /> lactose free
           </label>
           <br/>
         </form>
+        <br/>
         <br/>
         <p>Your name: {this.state.firstName} {this.state.lastName}</p>
         <p>Your gender: {this.state.gender}</p>
         <p>Your age: {this.state.age}</p>
         <p>Your destination: {this.state.destination}</p>
-        <p>Your dietry restrictions: <br />
-          Vegetarian? {this.state.vegetarian ? "Yes" : "No"}<br />
-          Kosher? {this.state.kosher ? "Yes" : "No"}<br />
-          Lactose free? {this.state.lactoseFree ? "Yes" : "No"}
+        <p>Your dietry restriction: <br/>
+          Vegetarian? {this.state.vegetarian ? "Yes" : "No"} <br/>
+          Kosher? {this.state.kosher ? "Yes" : "No"} <br/>
+          Lactose free? {this.state.lactoseFree ? "Yes" : "No"} <br/>
         </p>
       </div>
     )

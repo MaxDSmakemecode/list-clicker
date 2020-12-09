@@ -3,16 +3,12 @@ import React, {Component} from 'react'
 class Header extends Component{
     constructor(){
         super()
-
-        this.state = {
-
-        }
     }
 
     render(){
         return(
             <header>
-                <img 
+                <img
                     className="header-img" 
                     src="https://www.hurraki.de/w/images/c/cf/Trollface.jpg" 
                     alt="Problem?"
