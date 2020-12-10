@@ -1,38 +1,24 @@
-import React from 'react'
+import React, {Component} from 'react'
 
-const flexBox = {
-    display: 'flex',
-    padding: '1rem'
-}
+class TodoItem extends Component{
+    constructor(){
+        super()
 
-const uncompleteStyle = {
-    paddingLeft: '1rem', 
-    marginTop: '-0.05rem',
-    color: '#f53653',
-    textTransform: 'uppercase',
-    fontWeight: 'bold'
-}
+        this.state = {
 
-const completedStyle = {
-    paddingLeft: '1rem', 
-    marginTop: '-0.05rem',
-    color: '#19d477',
-    textTransform: 'uppercase',
-    fontWeight: 'bold'
-}
+        }
+    }
 
-const TodoItem = (props) => {
-    return(
-        <div style={flexBox} className="todo-item">
-            <input 
-                type="checkbox"
-                onChange={() => props.handleChange(props.item.id)}
-            />
-            <p style={props.item.completed ? completedStyle : uncompleteStyle}>
-                {props.item.text}
-            </p>
-        </div>
-    )
+    render(){
+        return(
+            <div className="todo-item">
+                <input
+                    type="checkbox"
+                />
+                <p>Placeholder text here</p>
+            </div>
+        )
+    }
 }
 
 export default TodoItem
