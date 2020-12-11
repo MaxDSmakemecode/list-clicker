@@ -21,7 +21,7 @@ const todolistItems = [
    },
    {
        id: 5,
-       text: "Catch up on arrested developement",
+       text: "Catch up on Arrested Developement",
        completed: false
    }
 ]
