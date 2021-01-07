@@ -4,12 +4,12 @@ class Header extends Component{
     render(){
         return(
             <header>
-                <img
-                    className="header-img" 
+                <img 
+                    className=""
                     src="https://www.hurraki.de/w/images/c/cf/Trollface.jpg" 
-                    alt="Problem?" 
+                    alt=""
                 />
-                <p>Meme Generator</p>
+                <p>MEME GENERATOR</p>
             </header>
         )
     }
