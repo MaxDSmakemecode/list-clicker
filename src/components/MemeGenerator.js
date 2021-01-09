@@ -1,8 +1,5 @@
 import React, {Component} from 'react'
 
-// https://picsum.photos/id/237/200/300
-// https://api.imgflip.com/get_memes
-
 class MemeGenerator extends Component{
     constructor(){
         super()
@@ -13,6 +10,9 @@ class MemeGenerator extends Component{
             randomImg: "https://picsum.photos/id/237/200/300",
             allMemeImgs: [],
         }
+
+        this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     componentDidMount(){
@@ -26,13 +26,26 @@ class MemeGenerator extends Component{
     }
 
     handleChange(event){
-        const randomNumber = Math.floor(Math.random() * this.state.allMemeImgs.length + 1)
+        const { name, value} = event.target
+
+        this.setState({
+            [name]: value
+        })
+    }
+
+    handleSubmit(event){
+        event.preventDefault()
+        const randomNumber = Math.floor(Math.random() * this.state.allMemeImgs.length)
+        const randomMeme = this.state.allMemeImgs[randomNumber].url
+        this.setState({
+            randomImg: randomMeme
+        })
     }
 
     render(){
         return(
             <div>
-                <form className="meme-form">
+                <form className="meme-form" onSubmit={this.handleSubmit}>
                     <input
                         type="text"
                         name="topText"
