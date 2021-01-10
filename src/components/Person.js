@@ -1,13 +1,11 @@
 import React from 'react'
 
-class Person extends React.Component{
-    render(){
-        return(
-            <React.Fragment>
-
-            </React.Fragment>
-        )
-    }
+function Person(props){
+    return(
+        <React.Fragment>
+            <li>{props.name}</li>
+        </React.Fragment>
+    )
 }
 
 export default Person
