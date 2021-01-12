@@ -8,7 +8,7 @@ class MemeGenerator extends Component{
             topText: "",
             bottomText: "",
             randomImg: "https://picsum.photos/id/237/200/300",
-            allMemeImgs: [],
+            allMemeImgs: "",
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -20,13 +20,14 @@ class MemeGenerator extends Component{
         .then(response => response.json())
         .then(response => {
             const { memes } = response.data
-            console.log(memes[0])
-            this.setState({ allMemeImgs: memes })
+            this.setState({
+                allMemeImgs: memes
+            })
         })
     }
 
     handleChange(event){
-        const { name, value} = event.target
+        const { name, value } = event.target
 
         this.setState({
             [name]: value
@@ -36,17 +37,22 @@ class MemeGenerator extends Component{
     handleSubmit(event){
         event.preventDefault()
         const randomNumber = Math.floor(Math.random() * this.state.allMemeImgs.length)
-        const randomMeme = this.state.allMemeImgs[randomNumber].url
+        const randomImgUrl = this.state.allMemeImgs[randomNumber].url
         this.setState({
-            randomImg: randomMeme
+            randomImg: randomImgUrl
         })
     }
 
     render(){
+        console.log(this.state.randomImg)
+
         return(
-            <div>
-                <form className="meme-form" onSubmit={this.handleSubmit}>
-                    <input
+            <React.Fragment>
+                <form 
+                    className="meme-form"
+                    onSubmit={this.handleSubmit}
+                >
+                    <input 
                         type="text"
                         name="topText"
                         value={this.state.topText}
@@ -63,11 +69,14 @@ class MemeGenerator extends Component{
                     <button>Gen</button>
                 </form>
                 <div className="meme">
-                    <img src={this.state.randomImg} alt=""/>
                     <h2 className="top">{this.state.topText}</h2>
                     <h2 className="bottom">{this.state.bottomText}</h2>
+                    <img 
+                        src={this.state.randomImg}
+                        alt=""
+                    />
                 </div>
-            </div>
+            </React.Fragment>
         )
     }
 }

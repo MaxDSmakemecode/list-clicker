@@ -5,7 +5,6 @@ class Header extends Component{
         return(
             <header>
                 <img 
-                    className=""
                     src="https://www.hurraki.de/w/images/c/cf/Trollface.jpg" 
                     alt=""
                 />
