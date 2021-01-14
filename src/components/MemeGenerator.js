@@ -28,7 +28,6 @@ class MemeGenerator extends Component{
 
     handleChange(event){
         const { name, value } = event.target
-
         this.setState({
             [name]: value
         })
@@ -44,14 +43,9 @@ class MemeGenerator extends Component{
     }
 
     render(){
-        console.log(this.state.randomImg)
-
         return(
-            <React.Fragment>
-                <form 
-                    className="meme-form"
-                    onSubmit={this.handleSubmit}
-                >
+            <div>
+                <form onSubmit={this.handleSubmit} className="meme-form">
                     <input 
                         type="text"
                         name="topText"
@@ -72,11 +66,11 @@ class MemeGenerator extends Component{
                     <h2 className="top">{this.state.topText}</h2>
                     <h2 className="bottom">{this.state.bottomText}</h2>
                     <img 
-                        src={this.state.randomImg}
+                        src={this.state.randomImg} 
                         alt=""
                     />
                 </div>
-            </React.Fragment>
+            </div>
         )
     }
 }

@@ -1,16 +1,17 @@
-import React, {Component} from 'react'
-import Header from './components/Header'
-import MemeGenerator from './components/MemeGenerator'
+import React from 'react'
+import persons from './client_data/persons'
+import Person from './components/Person'
 
-class App extends Component{
-  render(){
-    return(
-      <React.Fragment>
-        <Header />
-        <MemeGenerator />
-      </React.Fragment>
-    )
-  }
+function App(){
+  const personMap = persons.map(person => <Person key={person.id} name={person.name} />)
+  
+  return(
+    <div>
+      <ul style={{margin: 1 + "rem " + 2 + "rem"}}>
+        {personMap}
+      </ul>
+    </div>
+  )
 }
 
 export default App
