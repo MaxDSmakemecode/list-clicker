@@ -1,15 +1,12 @@
-import React from 'react'
-import persons from './client_data/persons'
-import Person from './components/Person'
+import React, {useState, useEffect} from 'react'
+import Header from './components/Header'
+import MemeGenerator from './components/MemeGenerator'
 
 function App(){
-  const personMap = persons.map(person => <Person key={person.id} name={person.name} />)
-  
   return(
     <div>
-      <ul style={{margin: 1 + "rem " + 2 + "rem"}}>
-        {personMap}
-      </ul>
+      <Header />
+      <MemeGenerator />
     </div>
   )
 }
