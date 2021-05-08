@@ -69,62 +69,7 @@
 
 // export default MemeGenerator
 
-import React, { useState, useEffect } from "react";
 
-function MemeGenerator() {
-  const [inputs, setInputs] = useState({
-    topText: "",
-    bottomText: "",
-  });
-  const handleChange = (inputValue) => ({ target }) => setInputs((state) => ({ ...state, [inputValue]: target.value }));
 
-  const [randomImg, setRandomImg] = useState("https://picsum.photos/id/237/200/300");
-  const [allMemeImgs, setAllMemeImgs] = useState("");
 
-  useEffect(() => {
-    fetch("https://api.imgflip.com/get_memes")
-      .then((response) => response.json())
-      .then((response) => {
-        const { memes } = response.data;
-        setAllMemeImgs(memes);
-      });
-  });
-
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    const randomNum = Math.floor(Math.random() * allMemeImgs.length)
-    const randomMeme = allMemeImgs[randomNum].url
-    setRandomImg(randomMeme)
-  };
-
-  return (
-    <div>
-      <form className="meme-form" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          key="topText"
-          name="topText"
-          value={inputs.topText}
-          placeholder="Top text"
-          onChange={handleChange("topText")}
-        />
-        <input
-          type="text"
-          key="bottomText"
-          name="bottomText"
-          value={inputs.bottomText}
-          placeholder="Bottom text"
-          onChange={handleChange("bottomText")}
-        />
-        <button>Gen</button>
-      </form>
-      <div className="meme">
-        <h2 className="top">{inputs.topText}</h2>
-        <h2 className="bottom">{inputs.bottomText}</h2>
-        <img src={randomImg} alt="" />
-      </div>
-    </div>
-  );
-}
-
-export default MemeGenerator;
+// PRACTICE AREA ******************************************************************************
