@@ -143,14 +143,10 @@
 // export default App
 
 // PRACTICE AREA ******************************************************************************
+import React, { useState } from "react";
 
-import React, { Component } from "react";
-
-class App extends Component {
-  constructor() {
-    super();
-
-    this.state = {
+const App = () => {
+  const [ inputs, setInputs ] = useState({
       firstName: "",
       lastName: "",
       gender: "",
@@ -159,142 +155,137 @@ class App extends Component {
       vegetarian: "",
       kosher: "",
       lactoseFree: "",
-    };
+    })
 
-    this.handleChange = this.handleChange.bind(this)
+
+  const handleChange = inputValues => ({target}) => setInputs(state => ({...state, [inputValues]:target.value}))
+
+  const handleCheck = inputValues => ({target}) => setInputs(state => ({...state, [inputValues]: target.checked}))
+
+  // handleChange(event) {
+  //   const { name, value, checked, type } = event.target;
+  //   type === "checkbox" ? this.setState({ [name]: checked }) : this.setState({ [name]: value, })
+  // }
+  const wrapper = {
+    width: 300,
+    margin: 1 + "rem auto",
+  };
+
+  const mbOne = {
+    marginBottom: 1 + "rem",
+  };
+
+  const inputStyle = {
+    width: 300,
+    fontSize: 1 + "rem",
+    padding: 0.5 + "rem",
+    marginBottom: 1 + "rem",
+  };
+
+  const elementStyle = {
+    display: "block",
+    marginBottom: 0.5 + "rem",
+  };
+
+  const marginBottomOne = {
+    marginBottom: .5 + "rem"
   }
 
-  handleChange(e){
-    const { name, value, type, checked } = e.target
-
-    type === "checkbox" ? this.setState({ [name]: checked }) : this.setState({ [name]: value })
-  }
-
-  render() {
-    const wrapper = {
-      width: 300,
-      margin: 1 + "rem auto",
-    };
-
-    const inputStyle = {
-      width: 100 + "%",
-      padding: .5 + "rem"
-    }
-
-    return (
-      <>
-        <div style={wrapper}>
-          <form>
-            <input 
-              style={inputStyle}
-              type="text" 
-              name="firstName"
-              key="firstName"
-              value={this.firstName}
-              placeholder="First name"
-              onChange={this.handleChange}
-            />
-            <br/><br/>
-            <input 
-              style={inputStyle}
-              type="text" 
-              name="lastName"
-              key="lastName"
-              value={this.lastName}
-              placeholder="Last name"
-              onChange={this.handleChange}
-            />
-            <br/><br/>
-            <label>
-              <input 
-                type="radio" 
-                name="gender"
-                key="Male"
-                value="Male"
-                checked={this.state.gender === "Male"}
-                onChange={this.handleChange}
-              /> Male
-            </label>
-            <br/>
-            <label>
-              <input 
-                type="radio" 
-                name="gender"
-                key="Female"
-                value="Female"
-                checked={this.state.gender === "Female"}
-                onChange={this.handleChange}
-              /> Female
-            </label>
-            <br/><br/>
-            <input 
-              style={inputStyle}
-              type="number" 
-              name="age"
-              key="age"
-              value={this.age}
-              placeholder="Age"
-              onChange={this.handleChange}
-            />
-            <br/><br/>
-            <select 
-              style={inputStyle}
-              name="destination"
-              value={this.state.destination}
-              onChange={this.handleChange}
-            >
-              <option value="Tokyo">Tokyo</option>
-              <option value="Berlin">Berlin</option>
-              <option value="Cancun">Cancun</option>
-            </select>
-            <br/><br/>
-            <p>Your dietry restrictions:</p>
-            <label>
-              <input 
-                type="checkbox" 
-                name="vegetarian"
-                key="vegetarian"
-                value={this.state.vegetarian}
-                onChange={this.handleChange}
-              /> Vegetarian
-            </label>
-            <br/>
-            <label>
-              <input 
-                type="checkbox" 
-                name="kosher"
-                key="kosher"
-                value={this.state.kosher}
-                onChange={this.handleChange}
-              /> Kosher
-            </label>
-            <br/>
-            <label>
-              <input 
-                type="checkbox" 
-                name="lactoseFree"
-                key="lactoseFree"
-                value={this.state.lactoseFree}
-                onChange={this.handleChange}
-              /> Lactose free
-            </label>
-            <br/>
-          </form>
-          <br/><br/>
-          <p>Your name: {this.state.firstName} {this.state.lastName}</p>
-          <p>Your gender: {this.state.gender}</p>
-          <p>Your age: {this.state.age}</p>
-          <p>Your destination: {this.state.destination}</p>
-          <p>Your dietry restrictions:</p>
-          <p style={{paddingLeft: 1 + "rem"}}>
-          Vegetarian? {this.state.vegetarian ? "Yes" : "No"}<br/>
-          Kosher? {this.state.kosher ? "Yes" : "No"}<br/>
-          Lactose free? {this.state.lactoseFree ? "Yes" : "No"}
+  return (
+    <>
+      <div style={wrapper}>
+        <h1 style={mbOne}>Flight booker</h1>
+        <form style={mbOne}>
+          <input
+            style={inputStyle}
+            type="text"
+            name="firstName"
+            value={inputs.firstName}
+            placeholder="First name"
+            onChange={handleChange("firstName")}
+          />
+          <input
+            style={inputStyle}
+            type="text"
+            name="lastName"
+            value={inputs.lastName}
+            placeholder="Last name"
+            onChange={handleChange("lastName")}
+          />
+          <label style={elementStyle}>
+            <input
+              type="radio"
+              name="gender"
+              value="Male"
+              checked={inputs.gender === "Male"}
+              onChange={handleChange("gender")}
+            /> Male
+          </label>
+          <label style={elementStyle}>
+            <input
+              type="radio"
+              name="gender"
+              value="Female"
+              checked={inputs.gender === "Female"}
+              onChange={handleChange("gender")}
+            /> Female
+          </label>
+          <input
+            style={inputStyle}
+            type="number"
+            name="age"
+            value={inputs.age}
+            placeholder="Age"
+            onChange={handleChange("Age")}
+          />
+          <select 
+            style={inputStyle}
+            name="destination" 
+            onChange={handleChange("destination")}
+          >
+            <option value="Tokyo">Tokyo</option>
+            <option value="Berlin">Berlin</option>
+            <option value="Cancun">Cancun</option>
+          </select>
+          <label style={elementStyle}>
+            <input
+              type="checkbox"
+              name="vegetarian"
+              checked={inputs.vegetarian}    
+              onChange={handleCheck("vegetarian")}
+            /> Vegetarian
+          </label>
+          <label style={elementStyle}>
+            <input
+              type="checkbox"
+              name="kosher"
+              checked={inputs.kosher}  
+              onChange={handleCheck("kosher")}
+            /> Kosher
+          </label>
+          <label style={elementStyle}>
+            <input
+              type="checkbox"
+              name="lactoseFree"
+              checked={inputs.lactoseFree}
+              onChange={handleCheck("lactoseFree")}
+            /> Lactose free
+          </label>
+        </form>
+        <div>
+          <p style={marginBottomOne}>Your name: {inputs.firstName} {inputs.lastName}</p>
+          <p style={marginBottomOne}>Your gender: {inputs.gender} </p>
+          <p style={marginBottomOne}>Your age: {inputs.age} </p>
+          <p style={marginBottomOne}>Your destination: {inputs.destination}</p>
+          <p style={marginBottomOne}>Your dietry restrictions: <br />
+            Vegetarian? {inputs.vegetarian ? "Yes" : "No"}<br />
+            Kosher? {inputs.kosher ? "Yes" : "No"} <br />
+            Lactose free? {inputs.lactoseFree ? "Yes" : "No"} <br />
           </p>
         </div>
-      </>
-    );
-  }
+      </div>
+    </>
+  );
 }
 
 export default App;
