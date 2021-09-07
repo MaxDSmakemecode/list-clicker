@@ -154,14 +154,150 @@ class App extends Component {
       lastName: "",
       gender: "",
       age: "",
+      destination: "",
+      vegetarian: "",
+      kosher: "",
+      lactoseFree: "",
     }
+
+    this.handleChange = this.handleChange.bind(this)
+  }
+
+  handleChange(event){
+    // same as
+    // const name = event.target.name
+    // const value = event.target.value
+    // const { name, value } = event.target
+    // this.setState({
+    //   [name]: value
+      // same as event.target.name: event.target.value
+    // })
+
+    const { name, value, type, checked } = event.target
+    type === "checkbox" ? this.setState({ [name]: checked}) : this.setState({ [name]: value })
   }
 
   render(){
+    const formWrapper = {
+      width: 300 + "px",
+      margin: 2 + "rem auto"
+    }
+
+    const formStyle = {
+      marginBottom: 2 + "rem"
+    }
+
+    const inputStyle = {
+      width: 100 + "%",
+      marginBottom: 1 + "rem",
+      padding: .5 + "rem"
+    }
+
     return(
-      <div>
-        Hi
-      </div>
+      <React.Fragment>
+        <div style={formWrapper}>
+          <form style={formStyle}>
+            <input 
+              style={inputStyle}
+              type="text"
+              name="firstName"
+              value={this.state.firstName}
+              onChange={this.handleChange}
+              placeholder="First name"
+            />
+            <br />
+            <input 
+              style={inputStyle}
+              type="text"
+              name="lastName"
+              value={this.state.lastName}
+              onChange={this.handleChange}
+              placeholder="Last name"
+            />
+            <br />
+            <label>
+              <input 
+                type="radio"
+                name="gender"
+                value="Male"
+                checked={this.state.gender === "Male"}
+                onChange={this.handleChange}
+              /> Male
+            </label>
+            <br />
+            <label>
+              <input 
+                type="radio"
+                name="gender"
+                value="Female"
+                checked={this.state.gender === "Female"}
+                onChange={this.handleChange}
+              /> Female
+            </label>
+            <br />
+            <br />
+            <input 
+              style={inputStyle}
+              type="number"
+              name="age"
+              value={this.state.age}
+              onChange={this.handleChange}
+              placeholder="Age"
+            />
+            <br />
+            <br />
+            <select 
+              style={inputStyle}
+              name="destination"
+              onChange={this.handleChange}
+            >
+              <option value="Tokyo">Tokyo</option>
+              <option value="Berlin">Berlin</option>
+              <option value="Sao Miguel">Sao Miguel</option>
+            </select>
+            <br />
+            <br />
+            <label>
+              <input 
+                type="checkbox"
+                name="vegetarian"
+                value={this.state.vegetarian}
+                onChange={this.handleChange}
+              /> Vegetarian
+            </label>
+            <br />
+            <label>
+              <input 
+                type="checkbox"
+                name="kosher"
+                value={this.state.kosher}
+                onChange={this.handleChange}
+              /> Kosher
+            </label>
+            <br />
+            <label>
+              <input 
+                type="checkbox"
+                name="lactoseFree"
+                value={this.state.lactoseFree}
+                onChange={this.handleChange}
+              /> Lactose free
+            </label>
+            <br />
+          </form>
+          <div>
+            <p>Your name: {this.state.firstName} {this.state.lastName}</p>
+            <p>Your gender: {this.state.gender}</p>
+            <p>Your age: {this.state.age}</p>
+            <p>Your destination: {this.state.destination}</p>
+            <p>Your dietry restrictions:<br />
+              Vegetarian? {this.state.vegetarian ? "Yes" : "No"} <br />
+              Kosher? {this.state.kosher ? "Yes" : "No"} <br />
+              Lactose free? {this.state.lactoseFree ? "Yes" : "No"} <br />
+            </p>
+          </div>
+        </div>
+      </React.Fragment>
     )
   }
 }
